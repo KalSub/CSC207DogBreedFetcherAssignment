@@ -13,6 +13,15 @@ public class Main {
         breed = "cat";
         result = getNumberOfSubBreeds(breed, breedFetcher);
         System.out.println(breed + " has " + result + " sub breeds");
+
+        DogApiBreedFetcher fetcher = new DogApiBreedFetcher();
+        try {
+            System.out.println(fetcher.getSubBreeds("hound"));
+        } catch (BreedFetcher.BreedNotFoundException e) {
+            System.out.println("Breed not found: " + e.getMessage());
+        }
+
+
     }
 
     /**
