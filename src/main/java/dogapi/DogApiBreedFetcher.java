@@ -25,7 +25,7 @@ public class DogApiBreedFetcher implements BreedFetcher {
      */
     @Override
     public List<String> getSubBreeds(String breed) throws BreedNotFoundException{
-        String url = "https://api.dogapi.com/breeds/" + breed + "/list";
+        String url = "https://dog.ceo/api/breed/" + breed + "/list";
 
 
         Request request = new Request.Builder().url(url).build();
@@ -35,7 +35,8 @@ public class DogApiBreedFetcher implements BreedFetcher {
                 throw new BreedNotFoundException("No breed found with name " + breed);
             }
 
-            String content = response.body().toString();
+            assert response.body() != null;
+            String content = response.body().string();
             JSONObject jsonObject = new JSONObject(content);
 
             if (jsonObject.getString("status").equals("error")) {
